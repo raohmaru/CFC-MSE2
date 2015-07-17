@@ -1,0 +1,27 @@
+﻿mse version: 2.0.0
+short name: Normal style
+icon: ab_instant.png
+position hint: 1
+installer group: cfc/symbols/normal style
+
+version: 2013-07-20
+
+image font size: 135
+horizontal space: 2
+
+symbol:
+	code: |I
+	image: ab_instant.png
+symbol:
+	code: |T
+	image: ab_activated.png
+symbol:
+	code: |A
+	image: ab_auto.png
+	
+##############################################################
+# Insert-symbol menu
+insert symbol menu:
+	item: |I
+	item: |T
+	item: |A

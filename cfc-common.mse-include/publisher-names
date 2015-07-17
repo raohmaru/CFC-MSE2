@@ -1,0 +1,8 @@
+﻿# The publisher choices
+# Included by a game file
+
+choice:
+	name: none
+	line below: true
+choice: Capcom
+choice: SNK

@@ -1,0 +1,8 @@
+﻿mse version: 2.0.0
+full name: Icons/symbols for CFC templates
+version: 2013-07-22
+
+# This file doesn't do anything, other files in this directory can be included
+# in game/style files:
+#    publisher-images	Includes references to the publisher images
+#    team-images		Includes references to the team images

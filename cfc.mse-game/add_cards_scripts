@@ -1,0 +1,11 @@
+
+add cards script:
+	name: &Horizontal Cycle
+	description: Add 1 card of each type to the set
+	script:
+		# TODO:
+		#rarity := show_text_dialog("What rarity should the cards be?")
+		[ new_card([super_type: "Character", rarity: "D", soul_points:0, bonus_points: 100])
+		, new_card([super_type: "Action",    rarity: "D", soul_points:0])
+		, new_card([super_type: "Reaction",  rarity: "D", soul_points:0])
+		]

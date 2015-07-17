@@ -1,0 +1,32 @@
+﻿mse version: 2.0.0
+short name: CFC
+full name: Card Fighters' Clash
+installer group: cfc/game files
+icon: card-back.png
+position hint: 21
+
+version: 2013-05-07
+depends on: cfc-common.mse-include 2013-07-22
+
+############################################################## The script
+
+init script: include file: script
+
+############################################################## Lots of lists
+
+include file: card_fields
+include file: set_fields
+include file: statistics
+include file: packs
+include file: keywords
+include file: word_lists
+include file: add_cards_scripts
+include file: auto_replace
+
+############################################################## Other stuff
+
+card list color script:
+	if      is_character() then rgb(0,0,0)
+	else if is_action()    then rgb(220,0,0)
+	else if is_reaction()  then rgb(0,150,0)
+	else						rgb(83,83,83) # colorless

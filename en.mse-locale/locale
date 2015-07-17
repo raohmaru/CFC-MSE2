@@ -1,0 +1,5 @@
+package:
+	cfc-*.mse-symbol-font:
+		menu item |I:			&Instant	 |I
+		menu item |T:			Activa&ted	 |T
+		menu item |A:			&Automatic	 |A

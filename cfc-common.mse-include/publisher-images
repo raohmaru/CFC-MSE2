@@ -1,0 +1,5 @@
+﻿# Publisher images
+
+choice images:
+	Capcom: /cfc-common.mse-include/publishers/capcom.png
+	SNK: /cfc-common.mse-include/publishers/snk.png

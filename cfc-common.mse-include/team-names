@@ -1,0 +1,37 @@
+﻿# The team choices
+# Included by a game file
+
+choice:
+	name: none
+	line below: true
+choice: Art of Fighting
+choice: Breath of Fire
+choice: Buriki-One
+choice: Captain Commando
+choice: CVS2
+choice: Cyberbots
+choice: Dino Crisis
+choice: Fatal Fury
+choice: Final Fight
+choice: Ghost N Goblins
+choice: Kizuna Encounter
+choice: KOF
+choice: Last Blade
+choice: Legendary Wings
+choice: Marvel VS
+choice: Megaman
+choice: Metal Slug
+choice: Onimusha
+choice: Power Stone
+choice: Quiz Nanairo Dreams
+choice: Resident Evil
+choice: Rival School
+choice: Samurai Shodown
+choice: Star Gladiator
+choice: Street Fighter
+choice: Strider
+choice: SVC
+choice: Tech Romancer
+choice: Top Hunter
+choice: Vampire
+choice: Warzard

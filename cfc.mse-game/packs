@@ -1,0 +1,92 @@
+﻿
+############################################################## Card pack types
+
+pack type:
+	name: D
+	filter: card.rarity == "D" and not is_token_card()
+pack type:
+	name: C
+	filter: card.rarity == "C" and not is_token_card()
+pack type:
+	name: B
+	filter: card.rarity == "B" and not is_token_card()
+pack type:
+	name: A
+	filter: card.rarity == "A" and not is_token_card()
+pack type:
+	name: S
+	filter: card.rarity == "S" and not is_token_card()
+pack type:
+	name: token
+	filter: is_token_card()
+
+############################################################## Randomized selections
+
+pack type:
+	name: A or S
+	selectable: false
+	select: proportional
+	item:
+		name: A
+		weight: 6
+	item:
+		name: S
+		weight: 1
+
+############################################################## Common proportions of cards
+
+pack type:
+	name: B AND A
+	selectable: false
+	select: equal
+	item:
+		name: B
+		weight: 6
+	item:
+		name: A
+		weight: 1
+
+############################################################## Card packs
+
+pack type:
+	name: tournament pack
+	item:
+		name: A or S
+		amount: 3
+	item:
+		name: B
+		amount: 7
+	item:
+		name: C
+		amount: 15
+	item:
+		name: D
+		amount: 25
+
+pack type:
+	name: booster pack
+	item:
+		name: A or S
+		amount: 1
+	item:
+		name: B
+		amount: 2
+	item:
+		name: C
+		amount: 5
+	item:
+		name: D
+		amount: 7
+
+pack type:
+	name: additional D
+	item: D
+pack type:
+	name: additional C
+	item: C
+pack type:
+	name: additional B
+	item: B
+pack type:
+	name: additional A or S
+	item: A or S

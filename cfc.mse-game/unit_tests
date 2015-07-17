@@ -1,0 +1,4 @@
+# This script contains tests of the functions defined in other script files.
+# These are not used during normal execution, they are only used for development.
+# When everything is right, all these tests pass.
+

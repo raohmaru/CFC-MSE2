@@ -1,0 +1,77 @@
+﻿
+############################################################## Word lists
+
+word list:
+	name: type
+	word: Character
+	word: Action
+	word: Reaction
+
+word list:
+	name: character
+	word:
+		name:
+		line below: true
+	word: Agent
+	word: Aikido
+	word: Alien
+	word: Android
+	word: Artist
+	word: Assassin
+	word: Avatar
+	word: Beast
+	word: Boss
+	word: Boxer
+	word: Brute
+	word: Capoeira
+	word: Captain
+	word: Cursed
+	word: Cyborg
+	word: Deity
+	word: Demon
+	word: Detective
+	word: Experiment
+	word: Fighter
+	word: Gangster
+	word: Guardian
+	word: Gymnast
+	word: Hunter
+	word: Karateka
+	word: Kickboxer
+	word: Kobudo
+	word: Kung-fu
+	word: Magician
+	word: Mentor
+	word: Mercenary
+	word: Monk
+	word: Monster
+	word: Ninja
+	word: Pilot
+	word: Priest
+	word: Psychic
+	word: Robot
+	word: Samurai
+	word: Soldier
+	word: Spirit
+	word: Student
+	word: Sumotori
+	word: Swordsman
+	word: Taekwondo
+	word: Vampire
+	word: Warrior
+	word: Wrestler
+	word: Zombie
+
+word list:
+	name: action
+	word:
+		script: all_sub_types(match: "Action")
+		line below: true
+	#word: Fire
+
+word list:
+	name: reaction
+	word:
+		script: all_sub_types(match: "Reaction")
+		line below: true
+	#word: Fire

@@ -1,0 +1,241 @@
+﻿############################################################## Card fields
+
+############################# Automatic fields
+
+# The 'shape' of the card (flip, split, etc.)
+card field:
+	type: choice
+	name: shape
+	save value: false
+	show statistics: false
+	editable: false
+	choice: normal
+	choice: token
+	script: 
+		stylesheet     # indicate that this value should be updated when the stylesheet changes
+		card_shape()   # determined by the style
+
+############################# Background stuff
+card field:
+	type: color
+	name: border color
+	default: set.border_color
+	choice:
+		name: black
+		color: rgb(0,0,0)
+	choice:
+		name: white
+		color: rgb(255,255,255)
+	show statistics: false
+	description: The border of the card; can be any solid color.
+
+############################# Name line
+card field:
+	type: text
+	name: name
+	card list visible: true
+	card list column: 1
+	identifying: true
+	show statistics: false
+	description: The name of the card
+
+card field:
+	type: choice
+	name: publisher
+	icon: stats/publisher.png
+	position hint: 50
+	include file: /cfc-common.mse-include/publisher-names
+	description: The publisher of the game where this card is from
+
+card field:
+	type: choice
+	name: team
+	icon: stats/team.png
+	position hint: 51
+	include file: /cfc-common.mse-include/team-names
+	description: The game where this card appears
+
+############################# Image
+card field:
+	type: image
+	name: image
+	show statistics: false
+	description: The image of the card
+
+############################# Card type
+card field:
+	type: text
+	name: super type
+	icon: stats/card_type.png
+	script: super_type_filter(value)
+	card list visible: true
+	card list column: 4
+	card list name: type
+	show statistics: false
+	description: The type of the card
+
+card field:
+	type: text
+	name: sub type
+	icon: stats/card_subtype.png
+	card list visible: true
+	card list column: 5
+	card list name: subtype
+	position hint: 2
+	script: sub_type_filter(value, type:card.super_type)
+	description: The sub type of the card
+
+
+############################# Rarity
+card field:
+	type: choice
+	name: rarity
+	icon: stats/rarity.png
+	position hint: 100
+	choice: D
+	choice: C
+	choice: B
+	choice: A
+	choice: S
+	default: set.default_rarity
+	card list visible: true
+	card list column: 6
+	sort script: rarity_sort() + card.card_number
+	description: The rarity of the card
+
+card field:
+	type: choice
+	name: symbol
+	choice: normal
+	choice: inverted
+	show statistics: false
+	choice colors:
+		normal: rgb(33,33,33)
+		inverted: rgb(224,224,224)
+	description: The symbol of the set, to edit the symbol switch to the 'set info' tab
+	
+############################# Text box
+card field:
+	type: text
+	name: rule text
+	script: text_filter(input: value, card_name: card.name)
+	show statistics: false
+	multi line: true
+	description: The rules text for the card
+
+card field:
+	type: text
+	name: flavor text
+	script: flavor_text_filter(value)
+	show statistics: false
+	multi line: true
+	description: The flavor text for the card
+
+card field:
+	type: text
+	name: text
+	multi line: true
+	save value: false
+	show statistics: false
+	script:
+		combined_editor(field1: card.rule_text, separator: "<line>\n</line>", field2: card.flavor_text)
+	description: The rules and flavor text for the card; use up and down arrows to switch
+
+############################# BP & SP
+card field:
+	type: text
+	name: bonus points
+	icon: stats/power.png
+	script: bp_filter(value)
+	card list visible: true
+	card list column: 2
+	card list alignment: right
+	card list width: 50
+	card list name: BP
+	show statistics: false
+	description: The BP of the card
+
+card field:
+	type: text
+	name: soul points
+	default: 0
+	icon: stats/sp.png
+	script: sp_filter(value)
+	card list visible: true
+	card list column: 3
+	card list alignment: right
+	card list width: 50
+	card list name: SP
+	show statistics: false
+	description: The SP of the card
+
+############################# Backups
+card field:
+	type: text
+	name: backup 1
+	icon: stats/backup.png
+	script: backup_filter(value)
+	position hint: 20
+	show statistics: false
+	description: First backup character
+	
+card field:
+	type: text
+	name: backup 2
+	icon: stats/backup.png
+	script: backup_filter(value)
+	position hint: 21
+	show statistics: false
+	description: Second backup character
+	
+card field:
+	type: text
+	name: backup 3
+	icon: stats/backup.png
+	script: backup_filter(value)
+	position hint: 22
+	show statistics: false
+	description: Third backup character
+
+############################# Card sorting / numbering
+card field:
+	type: text
+	name: card number
+	save value: false
+	script:      card_number()
+	sort script: type_of_card() + card.card_number
+	card list visible: true
+	card list column: 10
+	card list width: 50
+	card list name: #
+	card list alignment: right
+	position hint: 100
+	editable: false
+	show statistics: false
+
+############################# Copyright stuff
+card field:
+	type: text
+	name: illustrator
+	icon: stats/illustrator.png
+	position hint: 101
+	default: set.artist
+	show statistics: false
+	description: Illustrator of this card, the default value can be changed on the 'set info' tab
+
+card field:
+	type: text
+	name: copyright
+	default: set.copyright
+	show statistics: false
+	save value: false
+	editable: false
+
+card field:
+	type: text
+	name: copyright line
+	save value: false
+	editable: false
+	show statistics: false
+	script: combined_editor(field1: card.copyright, separator: "  #", field2: card.card_number)
+	description: Copyright of this card and cardnumber, the default value can be changed on the 'set info' tab

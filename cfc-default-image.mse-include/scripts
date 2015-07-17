@@ -1,0 +1,18 @@
+# default image if there is none
+
+default_images := [
+ c: "character.png"
+ a:    "action.png"
+ r:  "reaction.png"
+ n:      "none.png"
+]
+
+default_image := {
+	lang  := language()
+	key :=
+		if      lang.is_character(input)  then "c" 
+		else if lang.is_action(input)     then "a"
+		else if lang.is_reaction(input)   then "r"
+		else								   "n"
+	"/cfc-default-image.mse-include/" + default_images[key]
+}

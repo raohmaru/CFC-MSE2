@@ -1,2 +1,6 @@
-# CFC-MSE2
-Card Fighters' Clash game template for Magic Set Editor 2
+# Card Fighters' Clash template for MSE2
+
+[Magic Set Editor 2](http://magicseteditor.sourceforge.net/) template files to create sets of cards for the
+[Card Fighters' Clash](https://github.com/raohmaru/CFC/) game for (OCTGN)](http://octgn.net/).
+
+Released under The MIT License (MIT).

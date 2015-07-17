@@ -1,0 +1,16 @@
+
+
+# Language specific strings
+languages := [
+	English: [
+		code              : "en",
+		spellcheck_code   : "en_us",
+		subtype_separator : " ",
+		is_character      : match@(match: "(?i)Character")
+		is_action         : match@(match: "(?i)\\bAction")
+		is_reaction       : match@(match: "(?i)Reaction")
+	]
+]
+
+# The selected language
+language := { languages[set.card_language] or else language.English }
