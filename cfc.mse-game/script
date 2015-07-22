@@ -2,6 +2,7 @@
 
 include file: language
 
+
 ############################################################## Filter BP and SP
 
 # Allow only numbers
@@ -80,6 +81,14 @@ zero_padding := {
 		input
 }
 pad_3_zeros := zero_padding@(pad:3)
+
+internal_card_number := {
+	position (
+		of: card
+		in: set
+		order_by: { sort_index() + sort_name(card.name) }
+	) + 1
+}
 
 card_number := {
 	(
@@ -287,5 +296,5 @@ card_shape := { "normal" }
 only_numbers := filter_text@(match: "^[0123456789]+")
 
 word_count := break_text@(match:"[^[:space:]]+") + length
-line_count := split_text@(match:"\n+",include_empty:false) + length
+line_count := split_text@(match:"\n+",include_empty: false) + length
 long_space_to_comma := replace@(match: " +", replace: ",")

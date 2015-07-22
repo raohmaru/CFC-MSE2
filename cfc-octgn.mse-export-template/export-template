@@ -58,67 +58,26 @@ script:
 		) +
 		octgn_text_filter
 	)
+	pad_5_zeros := zero_padding@(pad:5)
 	
-	# set_folder := set.GUID + "/"
 	set_folder := ""
 	
 	# ASCII character map
 	char_map := [" ":32,"!":33,"\"":34,"#":35,"$":36,"%":37,"&":38,"'":39,"(":40,")":41,"*":42,"+":43,",":44,"-":45,".":46,"/":47,"0":48,"1":49,"2":50,"3":51,"4":52,"5":53,"6":54,"7":55,"8":56,"9":57,":":58,";":59,"<":60,"=":61,">":62,"?":63,"@":64,"A":65,"B":66,"C":67,"D":68,"E":69,"F":70,"G":71,"H":72,"I":73,"J":74,"K":75,"L":76,"M":77,"N":78,"O":79,"P":80,"Q":81,"R":82,"S":83,"T":84,"U":85,"V":86,"W":87,"X":88,"Y":89,"Z":90,"[":91,"\\":92,"]":93,"^":94,"_":95,"`":96,"a":97,"b":98,"c":99,"d":100,"e":101,"f":102,"g":103,"h":104,"i":105,"j":106,"k":107,"l":108,"m":109,"n":110,"o":111,"p":112,"q":113,"r":114,"s":115,"t":116,"u":117,"v":118,"w":119,"x":120,"y":121,"z":122,"\{":123,"|":124,"\}":125,"~":126,"¡":161,"¢":162,"£":163,"¤":164,"¥":165,"¦":166,"§":167,"¨":168,"©":169,"ª":170,"«":171,"¬":172,"­":173,"®":174,"¯":175,"°":176,"±":177,"²":178,"³":179,"´":180,"µ":181,"¶":182,"·":183,"¸":184,"¹":185,"º":186,"»":187,"¼":188,"½":189,"¾":190,"¿":191,"À":192,"Á":193,"Â":194,"Ã":195,"Ä":196,"Å":197,"Æ":198,"Ç":199,"È":200,"É":201,"Ê":202,"Ë":203,"Ì":204,"Í":205,"Î":206,"Ï":207,"Ð":208,"Ñ":209,"Ò":210,"Ó":211,"Ô":212,"Õ":213,"Ö":214,"×":215,"Ø":216,"Ù":217,"Ú":218,"Û":219,"Ü":220,"Ý":221,"Þ":222,"ß":223,"à":224,"á":225,"â":226,"ã":227,"ä":228,"å":229,"æ":230,"ç":231,"è":232,"é":233,"ê":234,"ë":235,"ì":236,"í":237,"î":238,"ï":239,"ð":240,"ñ":241,"ò":242,"ó":243,"ô":244,"õ":245,"ö":246,"÷":247,"ø":248,"ù":249,"ú":250,"û":251,"ü":252,"ý":253,"þ":254,"ÿ":255,"Œ":338,"œ":339,"Š":352,"š":353,"Ÿ":376,"ƒ":402,"–":8211,"—":8212,"†":8224,"‡":8225,"•":8226,"…":8230,"‰":8240,"€":8364,"™":8482,"‘":8216,"’":8217,"“":8220,"”":8221]
 	
-	# Generates a GUID from the fields of a card
+	# Generates a GUID from the set GUID plus the card number
+	guid_tmpl := substring(set.GUID, begin:0, end:31)
 	guid := {
-		raw :=	card.time_created +
-				card.time_modified +
-				card.name +
-				to_text(card.super_type + card.sub_type) +
-				card.bonus_points +
-				card.soul_points +
-				card.rarity +
-				to_text(remove_whitespace_chars(card.rule_text)) +
-				card.illustrator +
-				card.publisher +
-				card.team +
-				to_text(card.backup_1 + card.backup_2 + card.backup_3) +
-				tmp_number +
-				set.title
-		
-		# A list with the string splitted into characters
-		chars := split_by_letter(raw)
-		raw_hex := ""
-		sum := length(chars)
-		# Get the ASCII code of each letter, then add its decimal and hex value
-		for each letter in chars do (
-			code := char_map[letter] or else 0
-			sum := sum + code
-			raw_hex := raw_hex + to_string(code*sum, format:"x")
-		)
-		len := length(raw_hex)
-		raw_hex := to_string(sum+len, format:"x") + raw_hex
-		incr := sum mod len
-		id := ""
-		j := incr
-		# To randomize the id, pick a letter every `incr` characters
-		for i from 1 to 32 do (
-			id := id + substring(raw_hex, begin:j, end:j+1)
-			j := j + incr
-			if j >= len then j := j - len
-		)
-		# Return the id formatted as a UUID
-		substring(id, begin:0, end:8) + "-" +
-		substring(id, begin:8, end:12) + "-" +
-		substring(id, begin:12, end:16) + "-" +
-		substring(id, begin:16, end:20) + "-" +
-		substring(id, begin:20)
+		guid_tmpl + pad_5_zeros(card.card_internal_number)
 	}
 
 	# Write a single card
 	write_card := {
-	tmp_number := card.card_number
-	tmp_guid := guid()
+	card_guid := guid()
 	
-	if options.images then write_image_file(card, file:"{set_folder}Cards/{ tmp_guid }.jpg", width:516)
+	if options.images then write_image_file(card, file:"{set_folder}Cards/{ card_guid }.jpg", width:516)
 	
-			"<card name=\"{ octgn_text_filter(card.name) }\" id=\"{ tmp_guid }\">
+			"<card name=\"{ octgn_text_filter(card.name) }\" id=\"{ card_guid }\">
 				<property name=\"Publisher\" value=\"{ card.publisher }\" />
 				<property name=\"Team\" value=\"{ card.team }\" />
 				<property name=\"Type\" value=\"{ trim(remove_tags(card.super_type)) }\" />
@@ -130,7 +89,7 @@ script:
 				<property name=\"Backup 1\" value=\"{ trim(remove_tags(card.backup_1)) }\" />
 				<property name=\"Backup 2\" value=\"{ trim(remove_tags(card.backup_2)) }\" />
 				<property name=\"Backup 3\" value=\"{ trim(remove_tags(card.backup_3)) }\" />
-				<property name=\"Number\" value=\"{ tmp_number }\" />
+				<property name=\"Number\" value=\"{ card.card_number }\" />
 			</card>
 			"
 	}
