@@ -83,18 +83,19 @@ script:
 	card_properties := {
 		offset := if alt then "	" else ""
 				"
-				{ offset }<property name=\"Publisher\" value=\"{ input.publisher }\" />
-				{ offset }<property name=\"Team\"      value=\"{ input.team }\" />
-				{ offset }<property name=\"Type\"      value=\"{ trim(remove_tags(input.super_type)) }\" />
-				{ offset }<property name=\"Subtype\"   value=\"{ trim(remove_tags(input.sub_type)) }\" />
-				{ offset }<property name=\"Rarity\"    value=\"{ input.rarity }\" />
-				{ offset }<property name=\"Rules\"     value=\"{ if not alt then parse_text(input.rule_text) else ""  }\" />
-				{ offset }<property name=\"BP\"        value=\"{ input.bonus_points}\" />
-				{ offset }<property name=\"SP\"        value=\"{ input.soul_points }\" />
-				{ offset }<property name=\"Backup 1\"  value=\"{ trim(remove_tags(input.backup_1)) }\" />
-				{ offset }<property name=\"Backup 2\"  value=\"{ trim(remove_tags(input.backup_2)) }\" />
-				{ offset }<property name=\"Backup 3\"  value=\"{ trim(remove_tags(input.backup_3)) }\" />
-				{ offset }<property name=\"Number\"    value=\"{ input.card_number }\" />
+				{ offset }<property name=\"Publisher\"   value=\"{ input.publisher }\" />
+				{ offset }<property name=\"Team\"        value=\"{ input.team }\" />
+				{ offset }<property name=\"Type\"        value=\"{ trim(remove_tags(input.super_type)) }\" />
+				{ offset }<property name=\"Subtype\"     value=\"{ trim(remove_tags(input.sub_type)) }\" />
+				{ offset }<property name=\"Rarity\"      value=\"{ input.rarity }\" />
+				{ offset }<property name=\"Rules\"       value=\"{ if not alt then parse_text(input.rule_text) else ""  }\" />
+				{ offset }<property name=\"BP\"          value=\"{ input.bonus_points}\" />
+				{ offset }<property name=\"SP\"          value=\"{ input.soul_points }\" />
+				{ offset }<property name=\"Backup 1\"    value=\"{ trim(remove_tags(input.backup_1)) }\" />
+				{ offset }<property name=\"Backup 2\"    value=\"{ trim(remove_tags(input.backup_2)) }\" />
+				{ offset }<property name=\"Backup 3\"    value=\"{ trim(remove_tags(input.backup_3)) }\" />
+				{ offset }<property name=\"Number\"      value=\"{ input.card_number }\" />
+				{ offset }<property name=\"Illustrator\" value=\"{ octgn_text_filter(input.illustrator) }\" />
 			"
 	}@(alt: false)
 	
