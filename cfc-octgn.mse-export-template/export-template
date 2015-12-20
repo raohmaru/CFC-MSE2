@@ -53,7 +53,6 @@ script:
 	remove_whitespace_chars := replace@(match:"\\s", replace:" ")
 	split_by_letter := break_text@(match: ".")
 	cfc_text_filter := (
-		remove_tags +
 		replace@(match:"&", replace:"\\&amp;") +
 		replace@(match:"(\")|(“)|(”)", replace:"\\&quot;") +
 		replace@(match:"(')|(‘)|(’)", replace:"\\&apos;") +
@@ -70,30 +69,32 @@ script:
 	parse_illustrator := filter_text@(match: "\\s+(.*)$", replace: "\\0")
 	parse_text := (
 		replace@(
-			match: "<sym[^>]*>([^<]+)</sym[^>]*> <b[^>]*>([^<]+)</b[^>]*>"
-			replace: "\\1  \\2"
+			match: ability_rgx,
+			replace: ""
 		) +
 		cfc_text_filter
 	)
 	pad_5_zeros := zero_padding@(pad:5)
 	ability_match  := match@(match: ability_rgx)
-	ability_filter := filter_text@(match: ability_rgx)
-	ability_get_type := replace@(match: ability_rgx, replace: "\\1")
-	ability_get_name := replace@(match: ability_rgx, replace: "\\2")
+	ability_filter := filter_text@(match: ability_rgx) + replace@(match:"\n", replace:"")
+	ability_remove := replace@(match: ability_rgx, replace: "")
+	ability_get_type := substring@(end:2)
+	ability_get_name := substring@(begin:3)
 	
 	write_fullcard := { write_image_file(file:"Cards/{ guid }{ alt }.jpg", width:516) }@(alt: "")
 	write_cropcard := { write_image_file(input.image, file:"Cards/Crops/{ guid }{ alt }.jpg", width:466) }@(alt: "")
 	
 	card_properties := {
-		rules_clean  := remove_tags(input.rule_text)
+		rules        := remove_tags(input.rule_text)
 		ability      := ""
 		ability_type := ""
 		ability_name := ""
-		if ability_match(rules_clean) then (
-			ability      := ability_filter(rules_clean)
+		if ability_match(rules) then (
+			ability      := ability_filter(rules)
 			ability_type := cfc_text_filter(ability_get_type(ability))
 			ability_name := cfc_text_filter(ability_get_name(ability))
 			ability      := cfc_text_filter(ability)
+			rules        := ability_remove(rules)
 		)
 		offset := if alt then "	" else ""
 				"
@@ -105,7 +106,7 @@ script:
 				{ offset }<property name=\"Ability\"      value=\"{ ability }\" />
 				{ offset }<property name=\"Ability Type\" value=\"{ ability_type }\" />
 				{ offset }<property name=\"Ability Name\" value=\"{ ability_name }\" />
-				{ offset }<property name=\"Rules\"        value=\"{ if not alt then parse_text(input.rule_text) else "" }\" />
+				{ offset }<property name=\"Rules\"        value=\"{ if not alt then cfc_text_filter(rules) else "" }\" />
 				{ offset }<property name=\"BP\"           value=\"{ input.bonus_points}\" />
 				{ offset }<property name=\"SP\"           value=\"{ input.soul_points }\" />
 				{ offset }<property name=\"Backup 1\"     value=\"{ trim(remove_tags(input.backup_1)) }\" />
