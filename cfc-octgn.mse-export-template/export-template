@@ -52,7 +52,7 @@ script:
 	ex_is_character := language().is_character@()
 	remove_whitespace_chars := replace@(match:"\\s", replace:" ")
 	split_by_letter := break_text@(match: ".")
-	octgn_text_filter := (
+	cfc_text_filter := (
 		remove_tags +
 		replace@(match:"&", replace:"\\&amp;") +
 		replace@(match:"(\")|(“)|(”)", replace:"\\&quot;") +
@@ -73,29 +73,46 @@ script:
 			match: "<sym[^>]*>([^<]+)</sym[^>]*> <b[^>]*>([^<]+)</b[^>]*>"
 			replace: "\\1  \\2"
 		) +
-		octgn_text_filter
+		cfc_text_filter
 	)
 	pad_5_zeros := zero_padding@(pad:5)
+	ability_match  := match@(match: ability_rgx)
+	ability_filter := filter_text@(match: ability_rgx)
+	ability_get_type := replace@(match: ability_rgx, replace: "\\1")
+	ability_get_name := replace@(match: ability_rgx, replace: "\\2")
 	
 	write_fullcard := { write_image_file(file:"Cards/{ guid }{ alt }.jpg", width:516) }@(alt: "")
 	write_cropcard := { write_image_file(input.image, file:"Cards/Crops/{ guid }{ alt }.jpg", width:466) }@(alt: "")
 	
 	card_properties := {
+		rules_clean  := remove_tags(input.rule_text)
+		ability      := ""
+		ability_type := ""
+		ability_name := ""
+		if ability_match(rules_clean) then (
+			ability      := ability_filter(rules_clean)
+			ability_type := cfc_text_filter(ability_get_type(ability))
+			ability_name := cfc_text_filter(ability_get_name(ability))
+			ability      := cfc_text_filter(ability)
+		)
 		offset := if alt then "	" else ""
 				"
-				{ offset }<property name=\"Publisher\"   value=\"{ input.publisher }\" />
-				{ offset }<property name=\"Team\"        value=\"{ input.team }\" />
-				{ offset }<property name=\"Type\"        value=\"{ trim(remove_tags(input.super_type)) }\" />
-				{ offset }<property name=\"Subtype\"     value=\"{ trim(remove_tags(input.sub_type)) }\" />
-				{ offset }<property name=\"Rarity\"      value=\"{ input.rarity }\" />
-				{ offset }<property name=\"Rules\"       value=\"{ if not alt then parse_text(input.rule_text) else ""  }\" />
-				{ offset }<property name=\"BP\"          value=\"{ input.bonus_points}\" />
-				{ offset }<property name=\"SP\"          value=\"{ input.soul_points }\" />
-				{ offset }<property name=\"Backup 1\"    value=\"{ trim(remove_tags(input.backup_1)) }\" />
-				{ offset }<property name=\"Backup 2\"    value=\"{ trim(remove_tags(input.backup_2)) }\" />
-				{ offset }<property name=\"Backup 3\"    value=\"{ trim(remove_tags(input.backup_3)) }\" />
-				{ offset }<property name=\"Number\"      value=\"{ input.card_number }\" />
-				{ offset }<property name=\"Illustrator\" value=\"{ octgn_text_filter(input.illustrator) }\" />
+				{ offset }<property name=\"Publisher\"    value=\"{ input.publisher }\" />
+				{ offset }<property name=\"Team\"         value=\"{ input.team }\" />
+				{ offset }<property name=\"Type\"         value=\"{ trim(remove_tags(input.super_type)) }\" />
+				{ offset }<property name=\"Subtype\"      value=\"{ trim(remove_tags(input.sub_type)) }\" />
+				{ offset }<property name=\"Rarity\"       value=\"{ input.rarity }\" />
+				{ offset }<property name=\"Ability\"      value=\"{ ability }\" />
+				{ offset }<property name=\"Ability Type\" value=\"{ ability_type }\" />
+				{ offset }<property name=\"Ability Name\" value=\"{ ability_name }\" />
+				{ offset }<property name=\"Rules\"        value=\"{ if not alt then parse_text(input.rule_text) else "" }\" />
+				{ offset }<property name=\"BP\"           value=\"{ input.bonus_points}\" />
+				{ offset }<property name=\"SP\"           value=\"{ input.soul_points }\" />
+				{ offset }<property name=\"Backup 1\"     value=\"{ trim(remove_tags(input.backup_1)) }\" />
+				{ offset }<property name=\"Backup 2\"     value=\"{ trim(remove_tags(input.backup_2)) }\" />
+				{ offset }<property name=\"Backup 3\"     value=\"{ trim(remove_tags(input.backup_3)) }\" />
+				{ offset }<property name=\"Number\"       value=\"{ input.card_number }\" />
+				{ offset }<property name=\"Illustrator\"  value=\"{ cfc_text_filter(input.illustrator) }\" />
 			"
 	}@(alt: false)
 	
@@ -110,7 +127,7 @@ script:
 
 	# Write a single card
 	write_card := {
-	card_name := octgn_text_filter(card.name)
+	card_name := cfc_text_filter(card.name)
 	card_guid := guid()
 	alternate := options.alternates and length(card.rule_text) > 0 and ex_is_character(card.super_type)
 	

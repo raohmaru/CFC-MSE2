@@ -141,6 +141,7 @@ additional_text_words := match@(match:
 	"(?ix)^(?:                         # match whole word
 	  <atom-[^>]*>.*?</atom-[^>]*>     # cardnames and stuff
 	)$")
+ability_rgx := "^([|][A-Z]) ([^\\n]+)\\n"
 
 # the rule text filter
 text_filter :=
@@ -181,7 +182,7 @@ text_filter :=
 		) +
 	#step 5 : add ability symbol and name
 	replace@(
-		match: "^([|][A-Z]) ([^\\n]+)\\n",
+		match: ability_rgx,
 		replace: "<sym-auto>\\1</sym-auto> <b-auto>\\2</b-auto>\\n" ) +
 	# step 6 : curly quotes
 	curly_quotes +
