@@ -258,3 +258,24 @@ card field:
 	show statistics: false
 	script: combined_editor(field1: card.copyright, separator: "  #", field2: card.card_number)
 	description: Copyright of this card and cardnumber, the default value can be changed on the 'set info' tab
+	
+############################# Other
+card field:
+	type: text
+	name: time modified
+	save value: false
+	show statistics: false
+	script: card.time_modified
+	card list name: modified
+	card list column: 100
+	description: Time modified of the card
+	
+card field:
+	type: text
+	name: time created
+	save value: false
+	show statistics: false
+	script: card.time_created
+	card list name: created
+	card list column: 101
+	description: Time created of the card
