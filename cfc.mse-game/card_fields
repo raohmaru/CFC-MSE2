@@ -15,6 +15,15 @@ card field:
 	script: 
 		stylesheet     # indicate that this value should be updated when the stylesheet changes
 		card_shape()   # determined by the style
+		
+# GUID
+# Use add_guid.rb to add a GUID for every card in the set file
+card field:
+	type: text
+	name: guid
+	card list allow: false
+	show statistics: false
+	editable: false
 
 ############################# Background stuff
 card field:

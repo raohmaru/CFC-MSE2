@@ -81,7 +81,7 @@ script:
 	ability_get_type := substring@(end:2)
 	ability_get_name := substring@(begin:3)
 	
-	write_fullcard := { write_image_file(file:"Cards/{ guid }{ alt }.jpg", width:516) }@(alt: "")
+	write_fullcard := { write_image_file(file:"Cards/{ guid }{ alt }.png", width:516) }@(alt: "")
 	write_cropcard := { write_image_file(input.image, file:"Cards/Crops/{ guid }{ alt }.jpg", width:466) }@(alt: "")
 	
 	card_properties := {
@@ -117,30 +117,23 @@ script:
 			"
 	}@(alt: false)
 	
-	# Generates a GUID from the set GUID plus the card number
-	guid_tmpl := substring(set.GUID, begin:0, end:31)
-	guid := {
-		guid_tmpl + pad_5_zeros(card.card_internal_number)
-	}
-
 	# Write a single card
 	write_card := {
 	card_name := cfc_text_filter(card.name)
-	card_guid := guid()
 	alternate := options.alternates and length(card.rule_text) > 0 and ex_is_character(card.super_type)
 	
 	if contains(options.images, match:"full card image") then (
-		write_fullcard(card, guid:card_guid)
+		write_fullcard(card, guid:card.guid)
 		if alternate then
-			write_fullcard(card, guid:card_guid, alt:".noability")
+			write_fullcard(card, guid:card.guid, alt:".noability")
 	) else if options.images == "cropped card image" then (
-		write_cropcard(card, guid:card_guid)
+		write_cropcard(card, guid:card.guid)
 		if alternate then
-			write_cropcard(card, guid:card_guid, alt:".noability")
+			write_cropcard(card, guid:card.guid, alt:".noability")
 	)
 		
 	
-			"<card name=\"{ card_name }\" id=\"{ card_guid }\">"
+			"<card name=\"{ card_name }\" id=\"{ card.guid }\">"
 				+ card_properties(card) +
 				(if alternate then
 					"	<alternate name=\"{ card_name }\" type=\"noability\">"
