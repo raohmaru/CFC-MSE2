@@ -33,11 +33,6 @@ option field:
 	choice: cropped card image
 	initial: no
 
-option field:
-	type: boolean
-	name: alternates
-	initial: no
-
 option style:
 	images:
 		render style: both
@@ -120,27 +115,16 @@ script:
 	# Write a single card
 	write_card := {
 	card_name := cfc_text_filter(card.name)
-	alternate := options.alternates and length(card.rule_text) > 0 and ex_is_character(card.super_type)
 	
 	if contains(options.images, match:"full card image") then (
 		write_fullcard(card, guid:card.guid)
-		if alternate then
-			write_fullcard(card, guid:card.guid, alt:".noability")
 	) else if options.images == "cropped card image" then (
 		write_cropcard(card, guid:card.guid)
-		if alternate then
-			write_cropcard(card, guid:card.guid, alt:".noability")
 	)
 		
 	
 			"<card name=\"{ card_name }\" id=\"{ card.guid }\">"
 				+ card_properties(card) +
-				(if alternate then
-					"	<alternate name=\"{ card_name }\" type=\"noability\">"
-					+ card_properties(card, alt: true) +
-					"	</alternate>
-			"
-				) +
 			"</card>
 			"
 	}
