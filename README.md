@@ -3,7 +3,8 @@
 [Card Fighters' Clash](https://github.com/raohmaru/CFC/) game, a plugin for [OCTGN](http://octgn.net/).
 
 ## Installation
-Download the [MSE installers]() and install them, or [download the template as a ZIP file](https://github.com/raohmaru/CFC-MSE2/archive/master.zip)
+Download the [MSE installers](https://github.com/raohmaru/CFC-MSE2/releases/download/1.0.0/cfc_mse2_v1.0.0.zip)
+and install them, or [download the template as a ZIP file](https://github.com/raohmaru/CFC-MSE2/archive/master.zip)
 and copy the contents into the MSE2/data/ folder.
 
 ### Fonts
