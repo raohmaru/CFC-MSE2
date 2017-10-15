@@ -16,7 +16,7 @@ option field:
 	type: text
 	name: game GUID
 	default: "e3d56d9e-900d-49c6-b6ae-22cbb51be153"
-	#script: "e3d56d9e-900d-49c6-b6ae-22cbb51be153"
+	script: "e3d56d9e-900d-49c6-b6ae-22cbb51be153"
 	description: The GUID of the game definition
 
 option field:
