@@ -110,7 +110,7 @@ card style:
 	name:
 		left:   45
 		top :   643
-		right:  450
+		right:  440
 		height: 66
 		alignment: top shrink-overflow
 		z index: 1
@@ -120,20 +120,21 @@ card style:
 			color: rgb(255,255,255)
 	
 	publisher:
-		left: 532
-		top : 480
-		width: 144
-		height: 49
+		left: 679
+		top : 256
+		width: 29
+		height: 156
 		z index: 2
 		render style: image
 		include file: /cfc-common.mse-include/publisher-images
 	
 	team:
-		left: 507
-		top : 532
+		left: 615
+		top : 626
 		width: 195
 		height: 96
 		z index: 2
+		angle: 90
 		render style: image
 		include file: /cfc-common.mse-include/teams-images
 
@@ -153,9 +154,9 @@ card style:
 	############################# Card type
 
 	super type:
-		left: 515
+		left: 525
 		top : 648
-		width: 136
+		width: 126
 		height: 33
 		alignment: top left shrink-overflow
 		z index: 2
@@ -163,12 +164,12 @@ card style:
 			name: Archivo Narrow
 			weight: bold
 			size: 22
-			color: rgb(206,206,206)
+			color: rgb(255,255,255)
 			
 	sub type:
-		left: 510
+		left: 520
 		top : 682
-		width: 136
+		width: 126
 		height: 26
 		alignment: top left shrink-overflow
 		z index: 2
@@ -248,7 +249,7 @@ card style:
 	bonus points:
 		z index: 4
 		left:	484
-		top:	58
+		top:	64
 		width:	185
 		height:	41
 		alignment: right middle
@@ -262,7 +263,7 @@ card style:
 	soul points:
 		z index: 4
 		left:	590
-		top:	{ if card.bonus_points != "" then 130 else 55 }
+		top:	{ if card.bonus_points != "" then 138 else 63 }
 		width:	82
 		height:	35
 		alignment: right middle
@@ -316,7 +317,7 @@ card style:
 	############################# Card sorting / numbering
 
 	illustrator:
-		left: 117
+		left: 130
 		top : 980
 		width: 272
 		height: 26
@@ -329,7 +330,7 @@ card style:
 
 	############################# Copyright stuff
 	copyright line:
-		left: 387
+		left: 389
 		top : 980
 		width: 315
 		height: 26
@@ -346,6 +347,12 @@ extra card field:
 	type: choice
 	name: bg
 	script: card.super_type
+	editable: false
+
+extra card field:
+	type: color
+	name: team box
+	script: if card.publisher == "Capcom" then rgb(224, 171, 23) else rgb(17, 126, 161)
 	editable: false
 
 extra card field:
@@ -400,29 +407,37 @@ extra card style:
 		z index: -2
 		render style: image
 		image: { "card-" + card_type() + ".png" }
-			
+		
+	team box:
+		left:	672
+		top:	61
+		width:	42
+		height:	581
+		z index: 1
+		visible: { card_type() == "character" }
+		
 	bp box:
-		left:	468
-		top:	43
-		width:	246
-		height:	88
+		left:	469
+		top:	52
+		width:	245
+		height:	75
 		z index: 1
 		visible: { if to_boolean(styling.cropping) then false else if card.bonus_points != "" then true }
 		render style: image
 		image: bp_box.png
 		
 	sp box:
-		left:	555
-		top:	{ if card.bonus_points != "" then 118 else 43 }
-		width:	159
-		height:	106
+		left:	556
+		top:	{ if card.bonus_points != "" then 127 else 52 }
+		width:	158
+		height:	104
 		z index: 1
 		visible: { if to_boolean(styling.cropping) then false else if card.soul_points != "" then true }
 		render style: image
 		image: sp_box.png
 		
 	subtype icon:
-		left:	452
+		left:	462
 		top:	649
 		width:	58
 		height:	58
@@ -468,4 +483,4 @@ extra card style:
 		height: 1046
 		z index: 3
 		render style: image
-		image: {if styling.overlay == "" then nil else styling.overlay + "/overlay.png"}
+		image: { if styling.overlay == "" then nil else styling.overlay + "/overlay.png" }
