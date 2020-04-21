@@ -437,7 +437,7 @@ extra card style:
 		image: sp_box.png
 		
 	subtype icon:
-		left:	462
+		left:	457
 		top:	649
 		width:	58
 		height:	58
