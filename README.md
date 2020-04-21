@@ -6,7 +6,7 @@ for [OCTGN](http://octgn.net/).
 ## Installation
 You need to have installed [Magic Set Editor 2](http://magicseteditor.sourceforge.net/download.html) in your computer.
 
-Download the last [MSE installers](https://github.com/raohmaru/CFC-MSE2/releases)
+Download the latest [MSE installers](https://github.com/raohmaru/CFC-MSE2/releases)
 and install them, or [download the template as a ZIP file](https://github.com/raohmaru/CFC-MSE2/archive/master.zip),
 unzip it and copy the folders which names starts with `cfc` into your `%MSE2-installation-dir%/data/` folder.
 
