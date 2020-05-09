@@ -8,43 +8,55 @@ statistics dimension:
 	description: The card's super type
 	script: card.super_type
 
-statistics dimension:
-	name: character class
-	position hint: 3
-	icon: stats/character_class.png
-	description: Class of creature cards
-	script:
-		if is_character() then
-			space_to_comma(trim(remove_tags(only_next(card.sub_type))))
-	show empty: false
-	split list: true
+# statistics dimension:
+	# name: character class
+	# position hint: 3
+	# icon: stats/character_class.png
+	# description: Class of creature cards
+	# script:
+		# if is_character() then
+			# space_to_comma(trim(remove_tags(only_next(card.sub_type))))
+	# show empty: false
+	# split list: true
 
 statistics dimension:
-	position hint: 10
 	name: bp
+	position hint: 10
+	icon: stats/bp.png
 	script: if is_character() then to_int(card.bonus_points) / 100
 	numeric: true
-	icon: stats/bp.png
 
 statistics dimension:
-	position hint: 11
 	name: sp
+	position hint: 11
+	icon: stats/sp.png
 	script: card.soul_points
 	numeric: true
-	icon: stats/sp.png
 
 statistics dimension:
-	position hint: 19
 	name: backups
-	script: long_space_to_comma(trim(remove_tags(card.backup_1 + " " + card.backup_2 + " " + card.backup_3)))
+	position hint: 19
 	icon: stats/backup.png
+	script: long_space_to_comma(trim(remove_tags(card.backup_1 + " " + card.backup_2 + " " + card.backup_3)))
 	show empty: false
 	split list: true
+
+statistics dimension:
+	name: action
+	position hint: 20
+	icon: stats/action.png
+	script: if is_action() then card.soul_points
+
+statistics dimension:
+	name: reaction
+	position hint: 21
+	icon: stats/reaction.png
+	script: if is_reaction() then card.soul_points
 
 statistics dimension:
 	name: keywords
 	position hint: 1000
+	icon: stats/keywords.png
 	script: keyword_usage(unique:true)
 	show empty: false
 	split list: true
-	icon: stats/keywords.png
