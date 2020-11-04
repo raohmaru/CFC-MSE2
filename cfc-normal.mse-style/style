@@ -211,7 +211,7 @@ card style:
 		visible: { not to_boolean(styling.cropping) }
 
 	############################# Text box
-	text:
+	rule text:
 		left: 118
 		top : 718
 		width: 596
