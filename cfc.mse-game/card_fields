@@ -133,6 +133,7 @@ card field:
 	show statistics: false
 	multi line: true
 	description: The rules text for the card
+	card list allow: false
 
 card field:
 	type: text
@@ -288,3 +289,28 @@ card field:
 	card list name: created
 	card list column: 101
 	description: Time created of the card
+	
+card field:
+	type: text
+	name: ability
+	save value: false
+	script: ability_sym(card.rule_text)
+	description: The ability type
+	position hint: 18
+	icon: stats/ability.png
+	
+card field:
+	type: text
+	name: ability name
+	save value: false
+	show statistics: false
+	script: to_title(ability_name(card.rule_text))
+	description: The ability type
+	
+card field:
+	type: text
+	name: rules
+	save value: false
+	script: rule_text(card.rule_text)
+	show statistics: false
+	multi line: true

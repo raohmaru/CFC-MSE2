@@ -53,10 +53,10 @@ statistics dimension:
 	icon: stats/reaction.png
 	script: if is_reaction() then card.soul_points
 
-statistics dimension:
-	name: keywords
-	position hint: 1000
-	icon: stats/keywords.png
-	script: keyword_usage(unique:true)
-	show empty: false
-	split list: true
+# statistics dimension:
+	# name: keywords
+	# position hint: 1000
+	# icon: stats/keywords.png
+	# script: keyword_usage(unique:true)
+	# show empty: false
+	# split list: true

@@ -141,7 +141,25 @@ additional_text_words := match@(match:
 	"(?ix)^(?:                         # match whole word
 	  <atom-[^>]*>.*?</atom-[^>]*>     # cardnames and stuff
 	)$")
-ability_rgx := "^([|][A-Z]) ([^\\n]+)\\n"
+ability_sym_rgx := "^([|][AIT])"
+ability_name_rgx := " ([^\\n]+)\\n"
+ability_rgx := ability_sym_rgx + ability_name_rgx
+
+abilities := [
+	"|A": "●",
+	"|I": "▲",
+	"|T": "■"
+]
+ability_sym :=
+	remove_tag@(tag: "<sym-auto>") +
+	filter_text@(match: ability_sym_rgx) +
+	replace@(match: ".+", replace: { abilities[input] })
+ability_name :=
+	remove_tags@() +
+	filter_text@(match: ability_rgx) +
+	replace@(match: ability_sym_rgx, replace: "") +
+	trim@()
+rule_text := remove_tags@() + replace@(match: ability_rgx, replace: "")
 
 # the rule text filter
 text_filter :=
