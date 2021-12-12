@@ -117,7 +117,7 @@ card style:
 		font:
 			name: Passion One
 			size: 46
-			color: rgb(255,255,255)
+			color: rgb(255, 255, 255)
 	
 	publisher:
 		left: 679
@@ -164,7 +164,7 @@ card style:
 			name: Archivo Narrow
 			weight: bold
 			size: 22
-			color: rgb(255,255,255)
+			color: rgb(255, 255, 255)
 			
 	sub type:
 		left: 520
@@ -177,7 +177,7 @@ card style:
 			name: Archivo Narrow
 			weight: bold
 			size: 17
-			color: rgb(255,255,255)
+			color: rgb(255, 255, 255)
 
 	############################# Rarity
 	rarity:
@@ -221,7 +221,7 @@ card style:
 			#italic name: MPlantin-Italic
 			size: 28
 			scale down to: 24
-			color: rgb(0,0,0)
+			color: rgb(0, 0, 0)
 		symbol font:
 			name: { styling.text_box_symbols }
 			size: 28
@@ -248,29 +248,28 @@ card style:
 	############################# BP & SP
 	bonus points:
 		z index: 4
-		left:	484
-		top:	64
+		left:	476
+		top:	65
 		width:	185
 		height:	41
 		alignment: right middle
-		symbol font:
-			name: cfc-numbers-bp
-			size: 40
-			alignment: bottom center
-		always symbol: true
+		font:
+			name: M04_FATAL FURY BLACK
+			size: 30
+			color: rgb(0, 0, 0)
 		visible: { if to_boolean(styling.cropping) then false else if card_type() == "character" then true }
 		
 	soul points:
 		z index: 4
-		left:	590
-		top:	{ if card.bonus_points != "" then 138 else 63 }
-		width:	82
-		height:	35
+		left:	476
+		top:	{ if card.bonus_points == "" then 65 else 135 }
+		width:	185
+		height:	41
 		alignment: right middle
-		symbol font:
-			name: cfc-numbers-sp
-			size: 34
-			alignment: bottom center
+		font:
+			name: M04_FATAL FURY BLACK
+			size: { if card.bonus_points == "" then 30 else 24 }
+			color: rgb(0, 0, 0)
 		always symbol: true
 		visible: { not to_boolean(styling.cropping) }
 
@@ -326,7 +325,7 @@ card style:
 		font:
 			name: Source Sans Pro
 			size: 16
-			color: rgb(255,255,255)
+			color: rgb(255, 255, 255)
 
 	############################# Copyright stuff
 	copyright line:
@@ -339,7 +338,7 @@ card style:
 		font:
 			name: Source Sans Pro
 			size: 16
-			color: rgb(255,255,255)
+			color: rgb(255, 255, 255)
 
 ############################################################## Extra card fields
 
@@ -417,22 +416,22 @@ extra card style:
 		visible: { card_type() == "character" }
 		
 	bp box:
-		left:	469
-		top:	52
-		width:	245
-		height:	75
+		left:	461
+		top:	51
+		width:	253
+		height:	172
 		z index: 1
 		visible: { if to_boolean(styling.cropping) then false else if card.bonus_points != "" then true }
 		render style: image
-		image: bp_box.png
+		image: bp-sp_box.png
 		
 	sp box:
-		left:	556
-		top:	{ if card.bonus_points != "" then 127 else 52 }
-		width:	158
-		height:	104
+		left:	501
+		top:	51
+		width:	213
+		height:	107
 		z index: 1
-		visible: { if to_boolean(styling.cropping) then false else if card.soul_points != "" then true }
+		visible: { if to_boolean(styling.cropping) then false else if card.bonus_points == "" then true }
 		render style: image
 		image: sp_box.png
 		
