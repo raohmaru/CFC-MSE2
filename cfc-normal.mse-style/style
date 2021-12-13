@@ -447,7 +447,7 @@ extra card style:
 		
 	backup1 icon:
 		left:   47
-		top :   800
+		top :   795
 		width:  58
 		height: 58
 		z index: 1
@@ -457,7 +457,7 @@ extra card style:
 		
 	backup2 icon:
 		left:   47
-		top :   862
+		top :   857
 		width:  58
 		height: 58
 		z index: 1
@@ -467,7 +467,7 @@ extra card style:
 		
 	backup3 icon:
 		left:   47
-		top :   924
+		top :   919
 		width:  58
 		height: 58
 		z index: 1
