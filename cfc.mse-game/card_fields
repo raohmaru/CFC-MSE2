@@ -249,7 +249,7 @@ card field:
 	position hint: 101
 	default: set.artist
 	show statistics: false
-	description: Illustrator of this card, the default value can be changed on the 'set info' tab
+	description: Illustrator of this card. The default value can be changed on the 'set info' tab.
 
 card field:
 	type: text
@@ -258,16 +258,7 @@ card field:
 	show statistics: false
 	save value: false
 	editable: false
-
-card field:
-	type: text
-	name: copyright line
-	save value: false
-	editable: false
-	card list allow: false
-	show statistics: false
-	script: combined_editor(field1: card.copyright, separator: "  #", field2: card.card_number)
-	description: Copyright of this card and cardnumber, the default value can be changed on the 'set info' tab
+	description: Copyright of this card. The default value can be changed on the 'set info' tab.
 	
 ############################# Other
 card field:

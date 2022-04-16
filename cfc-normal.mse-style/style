@@ -152,7 +152,6 @@ card style:
 		default: {default_image(card_type())}
 
 	############################# Card type
-
 	super type:
 		left: 530
 		top : 646
@@ -313,8 +312,7 @@ card style:
 			size: 20
 			color: rgba(255,255,255,0)
 	
-	############################# Card sorting / numbering
-
+	############################# Bottom line
 	illustrator:
 		left: 130
 		top : 980
@@ -327,14 +325,25 @@ card style:
 			size: 16
 			color: rgb(255, 255, 255)
 
-	############################# Copyright stuff
-	copyright line:
-		left: 389
+	copyright:
+		left: 407
 		top : 980
-		width: 315
+		width: 223
 		height: 26
 		z index: 1
 		alignment: right shrink-overflow
+		font:
+			name: Source Sans Pro
+			size: 16
+			color: rgb(255, 255, 255)
+	
+	card number:
+		left: 645
+		top : 980
+		width: 70
+		height: 26
+		z index: 1
+		alignment: center
 		font:
 			name: Source Sans Pro
 			size: 16
