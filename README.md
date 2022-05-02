@@ -16,10 +16,12 @@ The Normal style uses the following [OFL](http://scripts.sil.org/cms/scripts/pag
 - Passion One (https://fonts.google.com/specimen/Passion+One).
 - Source Sans Pro (https://fonts.google.com/specimen/Source+Sans+Pro).
 
+And the custom font CFC Digits.
+
 In order to properly display the design, please download and install the aforementioned fonts,
 then restart MSE2.
 
-(Or you can donwload [this ZIP file](https://github.com/raohmaru/CFC-MSE2/releases/download/1.0.0/cfc_fonts.zip) which
+(Or you can download [this ZIP file](https://github.com/raohmaru/CFC-MSE2/releases/download/1.3.2/cfc_fonts.zip) which
 includes only the required font files from each font family.)
 
 ## License

@@ -248,12 +248,12 @@ card style:
 	bonus points:
 		z index: 4
 		left:	476
-		top:	65
+		top:	67
 		width:	185
 		height:	41
 		alignment: right middle
 		font:
-			name: M04_FATAL FURY BLACK
+			name: CFC Digits Regular
 			size: 30
 			color: rgb(0, 0, 0)
 		visible: { if to_boolean(styling.cropping) then false else if card_type() == "character" then true }
@@ -261,12 +261,12 @@ card style:
 	soul points:
 		z index: 4
 		left:	476
-		top:	{ if card.bonus_points == "" then 65 else 135 }
+		top:	{ if card.bonus_points == "" then 67 else 137 }
 		width:	185
 		height:	41
 		alignment: right middle
 		font:
-			name: M04_FATAL FURY BLACK
+			name: CFC Digits Regular
 			size: { if card.bonus_points == "" then 30 else 24 }
 			color: rgb(0, 0, 0)
 		always symbol: true
