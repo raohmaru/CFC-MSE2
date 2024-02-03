@@ -109,20 +109,19 @@ script:
 				{ offset }<property name=\"Backup 3\"     value=\"{ trim(remove_tags(input.backup_3)) }\" />
 				{ offset }<property name=\"Number\"       value=\"{ input.card_number }\" />
 				{ offset }<property name=\"Illustrator\"  value=\"{ cfc_text_filter(input.illustrator) }\" />
+				{ offset }<property name=\"Gid\"          value=\"{ input.card_internal_number }\" />
 			"
 	}@(alt: false)
 	
 	# Write a single card
 	write_card := {
-	card_name := cfc_text_filter(card.name)
+		card_name := cfc_text_filter(card.name)
 	
-	if contains(options.images, match:"full card image") then (
-		write_fullcard(card, guid:card.guid)
-	) else if options.images == "cropped card image" then (
-		write_cropcard(card, guid:card.guid)
-	)
-		
-	
+		if contains(options.images, match:"full card image") then (
+			write_fullcard(card, guid:card.name)
+		) else if options.images == "cropped card image" then (
+			write_cropcard(card, guid:card.guid)
+		)
 			"<card name=\"{ card_name }\" id=\"{ card.guid }\">"
 				+ card_properties(card) +
 			"</card>
